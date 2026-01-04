@@ -1,11 +1,10 @@
-package com.joshrod94.userdatanormalizer;
+package com.joshrod94.userdatanormalizer.web;
 
 import com.joshrod94.userdatanormalizer.dto.NormalizationRunResponse;
 import com.joshrod94.userdatanormalizer.service.UserNormalizationService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.joshrod94.userdatanormalizer.dto.NormalizationRunResponse;
 
 
 @RestController
