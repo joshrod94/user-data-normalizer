@@ -6,6 +6,8 @@ import com.joshrod94.userdatanormalizer.dto.SourceUserDto;
 import com.joshrod94.userdatanormalizer.transform.UserNormalizer;
 import org.springframework.stereotype.Service;
 import com.joshrod94.userdatanormalizer.dto.NormalizationRunResponse;
+import com.joshrod94.userdatanormalizer.client.SinkUserApiClient;
+
 
 
 @Service
@@ -13,10 +15,15 @@ public class UserNormalizationService {
 
     private final SourceUserApiClient sourceUserApiClient;
     private final UserNormalizer userNormalizer;
+    private final SinkUserApiClient sinkUserApiClient;
 
-    public UserNormalizationService(SourceUserApiClient sourceUserApiClient, UserNormalizer userNormalizer) {
+
+    public UserNormalizationService(SourceUserApiClient sourceUserApiClient,
+                                    UserNormalizer userNormalizer,
+                                    SinkUserApiClient sinkUserApiClient) {
         this.sourceUserApiClient = sourceUserApiClient;
         this.userNormalizer = userNormalizer;
+        this.sinkUserApiClient = sinkUserApiClient;
     }
 
     public NormalizationRunResponse normalizeUsers() {
@@ -28,7 +35,12 @@ public class UserNormalizationService {
             sample = userNormalizer.normalize(users[0]);
         }
 
-        return new NormalizationRunResponse(fetchedCount, sample);
+        Integer forwardStatus = null;
+        if (sample != null) {
+            forwardStatus = sinkUserApiClient.forwardNormalizedUsers(sample);
+        }
+
+        return new NormalizationRunResponse(fetchedCount, sample, forwardStatus);
     }
 }
 

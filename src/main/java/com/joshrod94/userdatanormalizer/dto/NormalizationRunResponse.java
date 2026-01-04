@@ -6,10 +6,14 @@ public class NormalizationRunResponse {
 
     private int fetchedCount;
     private NormalizedUser sampleUser;
+    private Integer forwardStatus;
 
-    public NormalizationRunResponse(int fetchedCount, NormalizedUser sampleUser) {
+    public NormalizationRunResponse(int fetchedCount,
+                                    NormalizedUser sampleUser,
+                                    Integer forwardStatus) {
         this.fetchedCount = fetchedCount;
         this.sampleUser = sampleUser;
+        this.forwardStatus = forwardStatus;
     }
 
     public int getFetchedCount() {
@@ -19,4 +23,9 @@ public class NormalizationRunResponse {
     public NormalizedUser getSampleUser() {
         return sampleUser;
     }
+
+    public Integer getForwardStatus() {
+        return forwardStatus;
+    }
 }
+
