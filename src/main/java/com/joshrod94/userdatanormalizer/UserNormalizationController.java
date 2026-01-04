@@ -5,6 +5,8 @@ import com.joshrod94.userdatanormalizer.service.UserNormalizationService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.joshrod94.userdatanormalizer.dto.NormalizationRunResponse;
+
 
 @RestController
 @RequestMapping("/users")
@@ -18,9 +20,6 @@ public class UserNormalizationController {
 
     @PostMapping("/normalize")
     public NormalizationRunResponse normalizeUsers() {
-
-        int fetchedCount = userNormalizationService.normalizeUsers();
-
-        return new NormalizationRunResponse(fetchedCount);
+        return userNormalizationService.normalizeUsers();
     }
 }
