@@ -2,6 +2,8 @@ package com.joshrod94.userdatanormalizer.client;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
+import com.joshrod94.userdatanormalizer.dto.SourceUserDto;
+
 
 @Component
 public class SourceUserApiClient {
@@ -12,11 +14,11 @@ public class SourceUserApiClient {
         this.restClient = restClient;
     }
 
-    public String fetchUsers() {
+    public SourceUserDto[] fetchUsers() {
         return restClient
                 .get()
                 .uri("https://jsonplaceholder.typicode.com/users")
                 .retrieve()
-                .body(String.class);
+                .body(SourceUserDto[].class);
     }
 }

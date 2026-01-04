@@ -1,5 +1,6 @@
 package com.joshrod94.userdatanormalizer;
 
+import com.joshrod94.userdatanormalizer.dto.NormalizationRunResponse;
 import com.joshrod94.userdatanormalizer.service.UserNormalizationService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +17,10 @@ public class UserNormalizationController {
     }
 
     @PostMapping("/normalize")
-    public String normalizeUsers() {
-        userNormalizationService.normalizeUsers();
-        return "User normalization triggered";
+    public NormalizationRunResponse normalizeUsers() {
+
+        int fetchedCount = userNormalizationService.normalizeUsers();
+
+        return new NormalizationRunResponse(fetchedCount);
     }
 }
